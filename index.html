@@ -5,59 +5,104 @@
   <title>●●|●●●●●|●●|● — index</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="style.css" rel="stylesheet" />
-  <script defer src="script.js"></script>
+  <style>
+    body {
+      background: #000;
+      color: #e6e6e6;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Foundation image placeholder */
+    .banner {
+      margin-top: 20px;
+    }
+    .banner img {
+      max-width: 220px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: #9fe3a4;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+    }
+
+    /* List of links */
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+    .menu a {
+      color: #e6e6e6;
+      text-decoration: none;
+      border: 1px solid #1b1b1b;
+      background: #0a0a0a;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      width: 240px;
+      transition: background 0.2s ease;
+    }
+
+    .menu a:hover {
+      background: #111;
+    }
+
+    footer {
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* CRT flicker + scanline vibe */
+    .scanlines:before {
+      content: "";
+      position: fixed;
+      left: 0; right: 0; top: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0) 3px
+      );
+      pointer-events: none;
+      opacity: 0.12;
+    }
+  </style>
 </head>
-<body class="no-say">
-  <header>
-    <h1 class="glitch" data-text="■■■ ACCESS WITH SYMBOLS ONLY ■■■">■■■ ACCESS WITH SYMBOLS ONLY ■■■</h1>
-    <p class="tiny">Do <em>not</em> write or speak about <span class="bars">●●|●●●●●|●●|●</span>. Use tallies and pictures.</p>
-  </header>
 
-  <main class="grid">
-    <a class="card" href="brief.html">
-      <h2>Briefing</h2>
-      <p>Symbols-only orientation.</p>
-    </a>
-    <a class="card" href="counting-room.html">
-      <h2>Counting Room</h2>
-      <p>Add tallies. (Don’t reach seven.)</p>
-    </a>
-    <a class="card" href="gallery.html">
-      <h2>Gallery</h2>
-      <p>Suggested “safe” images.</p>
-    </a>
-    <a class="card" href="incident-a.html">
-      <h2>Incident ▮/A</h2>
-      <p>Redactions and doors.</p>
-    </a>
-    <a class="card" href="incident-b.html">
-      <h2>Incident ▮/B</h2>
-      <p>Stairs that end nowhere.</p>
-    </a>
-    <a class="card" href="map.html">
-      <h2>Site Map</h2>
-      <p>ASCII wayfinding.</p>
-    </a>
-    <a class="card" href="lost-and-found.html">
-      <h2>Lost & Found</h2>
-      <p>Things it left behind?</p>
-    </a>
-    <a class="card" href="notes.html">
-      <h2>Notes</h2>
-      <p>Protocols in pictograms.</p>
-    </a>
-    <a class="card" href="exit.html">
-      <h2>Exit</h2>
-      <p>Nothing follows.</p>
-    </a>
-    <a class="card" href="whisper.html">
-      <h2>Whisper</h2>
-      <p>Click, don’t speak.</p>
-    </a>
-  </main>
+<body class="scanlines">
+  <div class="banner">
+    <img src="images/foundation.jpg" alt="SCP Foundation logo placeholder">
+  </div>
 
-  <footer class="foot">
-    <small>Content inspired by the SCP Foundation entry for <span class="bars">●●|●●●●●|●●|●</span>. See licensing note in <a href="notes.html">Notes</a>.</small>
+  <h1>[ ACCESS TERMINAL — USE LINKS ONLY ]</h1>
+
+  <nav class="menu">
+    <a href="brief.html">Briefing</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="counting-room.html">Counting Room</a>
+    <a href="incident-a.html">Incident ▮/A</a>
+    <a href="incident-b.html">Incident ▮/B</a>
+    <a href="map.html">Site Map</a>
+    <a href="lost-and-found.html">Lost & Found</a>
+    <a href="whisper.html">Whisper</a>
+    <a href="exit.html">Exit</a>
+  </nav>
+
+  <footer>
+    <small>NO TEXT. NO SPEECH. ONLY IMAGES.</small>
   </footer>
 </body>
 </html>

@@ -5,24 +5,41 @@
   <title>Whisper — ●●|●●●●●|●●|●</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="style.css" rel="stylesheet" />
+  <!-- Make sure script.js is in the same folder as this file -->
   <script defer src="script.js"></script>
 </head>
 <body class="no-say">
   <nav class="crumbs"><a href="index.html">⌂</a> › Whisper</nav>
+
   <article class="doc center">
     <h1>Whisper</h1>
     <p class="tiny">Click the circles in order. Do not type.</p>
 
+    <!--
+      data-seq is 1-based positions (e.g., "2,5,1,4,3").
+      You can change the pattern without touching the JS.
+    -->
     <div class="dots" id="dots" data-seq="2,5,1,4,3">
-      <button aria-label="dot" class="dot"></button>
-      <button aria-label="dot" class="dot"></button>
-      <button aria-label="dot" class="dot"></button>
-      <button aria-label="dot" class="dot"></button>
-      <button aria-label="dot" class="dot"></button>
+      <button type="button" aria-label="dot 1" class="dot"></button>
+      <button type="button" aria-label="dot 2" class="dot"></button>
+      <button type="button" aria-label="dot 3" class="dot"></button>
+      <button type="button" aria-label="dot 4" class="dot"></button>
+      <button type="button" aria-label="dot 5" class="dot"></button>
     </div>
 
-    <p class="vanish" id="whisperMsg">…it noticed.</p>
+    <!-- Status text: hidden until success; fades in via .show -->
+    <p class="vanish" id="whisperMsg" aria-live="polite">…it noticed.</p>
+
+    <!-- Screen-reader-only live region for extra feedback -->
+    <span id="whisperAria" class="tiny" style="position:absolute;left:-9999px;" aria-live="polite"></span>
+
     <p><a class="btn ghost" href="exit.html">Leave</a></p>
+
+    <noscript>
+      <p class="tiny" style="margin-top:1rem;opacity:.8;">
+        JavaScript is required for this interaction.
+      </p>
+    </noscript>
   </article>
 </body>
 </html>
