@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio - p5.js</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Portfolio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="page2.html">Glitch Art</a></li>
+          <li class="nav-item"><a class="nav-link" href="page3.html">Meme Mashup</a></li>
+          <li class="nav-item"><a class="nav-link" href="page4.html">Minecraft Build</a></li>
+          <li class="nav-item"><a class="nav-link" href="page5.html">3D Print</a></li>
+          <li class="nav-item"><a class="nav-link" href="page6.html">Net Art</a></li>
+          <li class="nav-item"><a class="nav-link active" href="page7.html">p5.js Work</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container text-center py-5">
+    <h1>p5.js</h1>
+    <img src="images/p5js.jpg" class="img-fluid rounded mb-4" alt="p5js">
+
+    <!-- Read-only code display area -->
+    <div class="text-start mx-auto" style="max-width:800px;">
+      <h4 class="mt-4 mb-3 text-center">p5.js Sketch Code</h4>
+      <pre class="bg-light p-3 rounded border text-start" style="white-space: pre-wrap; overflow-x: auto;">
+function setup() {
+  createCanvas(400, 400);
+  background(220);
+}
+
+
+let img;
+let initials = 'nn';
+let choice = '1';
+let screenbg = 250;   // off-white background color to "paint erase" with
+let lastscreenshot = 61;
+
+function preload() {
+  img = loadImage('https://veryprofessional3d.github.io/images/cat3.jpg');
+}
+
+function setup() {
+  createCanvas(600, 600);
+  background(screenbg);
+  rectMode(CENTER);
+  noStroke();
+}
+
+function draw() {
+  if (keyIsPressed) {
+    choice = key;
+    clear_print();
+  }
+  if (mouseIsPressed) {
+    newkeyChoice(choice);
+  }
+}
+
+// -------------------- BRUSHES --------------------
+function newkeyChoice(toolChoice) {
+
+  // 1) Black Square Brush
+  if (toolChoice === '1') {
+    push();
+    fill(0);
+    noStroke();
+    const size = 10;
+    const d = dist(mouseX, mouseY, pmouseX, pmouseY);
+    const steps = max(1, int(d / 3)); // ~3px spacing
+    for (let i = 0; i <= steps; i++) {
+      const x = lerp(pmouseX, mouseX, i / steps);
+      const y = lerp(pmouseY, mouseY, i / steps);
+      rect(x, y, size, size);
+    }
+    pop();
+
+  // 2) Large Black Square Brush
+  } else if (toolChoice === '2') {
+    push();
+    fill(0);
+    noStroke();
+    const size = 30;
+    const d = dist(mouseX, mouseY, pmouseX, pmouseY);
+    const steps = max(1, int(d / 5)); // ~5px spacing
+    for (let i = 0; i <= steps; i++) {
+      const x = lerp(pmouseX, mouseX, i / steps);
+      const y = lerp(pmouseY, mouseY, i / steps);
+      rect(x, y, size, size);
+    }
+    pop();
+
+  // 3) Smooth Eraser
+  } else if (toolChoice === '3') {
+    push();
+    noStroke();
+    fill(screenbg);         // exactly matches the canvas background color
+    const size = 32;        // eraser diameter
+    const d = dist(mouseX, mouseY, pmouseX, pmouseY);
+    const steps = max(1, int(d / 4)); // ~4px spacing so strokes connect
+    for (let i = 0; i <= steps; i++) {
+      const x = lerp(pmouseX, mouseX, i / steps);
+      const y = lerp(pmouseY, mouseY, i / steps);
+      circle(x, y, size);   // round head = smooth edges
+    }
+    pop();
+
+  // 4) Shading
+  } else if (toolChoice === '4') {
+    push();
+    noStroke();
+    for (let i = 0; i < 20; i++) {
+      const dx = random(-8, 8);
+      const dy = random(-8, 8);
+      fill(100, 100, 100, 12); // light gray, subtle alpha
+      ellipse(mouseX + dx, mouseY + dy, random(10, 20), random(10, 20));
+    }
+    pop();
+
+  // 5) Rainbow Triangle
+  } else if (toolChoice === '5') {
+    push();
+    colorMode(HSB, 360, 100, 100, 255);
+    const h = (frameCount * 3) % 360;
+    noFill();
+    stroke(h, 90, 100, 220);
+    strokeWeight(3);
+    const r = 20;
+    triangle(
+      mouseX, mouseY - r,
+      mouseX - r * 0.866, mouseY + r / 2,
+      mouseX + r * 0.866, mouseY + r / 2
+    );
+    colorMode(RGB, 255);
+    pop();
+
+  // 6) Glitch
+  } else if (toolChoice === '6') {
+    push();
+    stroke(255, 80, 80, 180);
+    strokeWeight(10);
+    line(mouseX + 1, mouseY, pmouseX + 1, pmouseY);
+    stroke(0);
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    pop();
+
+  // 7) Static
+  } else if (toolChoice === '7') {
+    push();
+    strokeWeight(1);
+    for (let i = 0; i < 60; i++) {
+      const g = random(40, 220);
+      stroke(g, g, g, random(80, 200));
+      point(mouseX + random(-12, 12), mouseY + random(-12, 12));
+    }
+    pop();
+
+  // 8) Neon Blue
+  } else if (toolChoice === '8') {
+    push();
+    stroke(0, 150, 255, 120);
+    strokeWeight(20);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    stroke(0, 180, 255);
+    strokeWeight(8);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    stroke(255);
+    strokeWeight(3);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    pop();
+
+  // 9) Soft Yellow Glow
+  } else if (toolChoice === '9') {
+    push();
+    noStroke();
+    for (let i = 0; i < 5; i++) {
+      fill(255, 255, 120, 50 - i * 8);
+      ellipse(mouseX, mouseY, 50 - i * 8, 50 - i * 8);
+    }
+    pop();
+
+  // 0) Confetti Spray
+  } else if (toolChoice === '0') {
+    push();
+    colorMode(HSB, 360, 100, 100, 255);
+    noStroke();
+    for (let i = 0; i < 24; i++) {
+      const h = (frameCount * 2 + i * 12) % 360;
+      fill(h, 90, 100, 180);
+      const sz = random(4, 12);
+      rect(mouseX + random(-30, 30), mouseY + random(-30, 30), sz, sz);
+    }
+    colorMode(RGB, 255);
+    pop();
+
+  // g) place the preloaded image
+  } else if (toolChoice === 'g' || toolChoice === 'G') {
+    image(img, mouseX, mouseY, 50, 50);
+  }
+}
+
+// -------------------- UTILITIES --------------------
+function clear_print() {
+  if (key === 'x' || key === 'X') {
+    background(screenbg);
+  } else if (key === 'p' || key === 'P') {
+    saveme();
+  }
+}
+
+function saveme() {
+  const filename = initials + day() + hour() + minute() + second();
+  if (second() !== lastscreenshot) {
+    saveCanvas(filename, 'jpg');
+    key = '';
+  }
+  lastscreenshot = second();
+}
+
+}
+
+      </pre>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
